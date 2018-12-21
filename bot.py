@@ -34,13 +34,16 @@ def add_user(id):
 
 def data_processing(id, pay, msg):
     add_user(id = id)
-    if pay=={"command":"start"} or pay == "admin":
+    if pay=='"command":"start"' or pay == "admin":
         print(id)
-        vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?"})
-    elif msg == "Сука":
+        try:
+            vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?"})
+        except vk_api.exceptions.VkApiError:
+            print("hahah")
+    elif msg == "admin":
         print("aaaaaa")
     else: 
-        vk.method("messages.send", {"user_id":id, "message": "ffffffff"})
+        vk.method("messages.send", {"user_id":id, "message": "ffffffff", "keyboard": key['start']})
 def get_msg():
     while True:
         try:
