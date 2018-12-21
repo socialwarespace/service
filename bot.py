@@ -38,9 +38,9 @@ def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
         print(id)
-        vk.method("messages.send", {"user_id": id, "message": " А как подобрать напрваление?", "keyboard":key['start']})
+        vk.method("messages.send", {"user_id": id, "message": "А как подобрать напрваление?"})
     else: 
-        vk.method("messages.send", {"user_id":id, "message": "ffffffff", "keyboard": key['start']})
+        vk.method("messages.send", {"user_id":id, "message": "ffffffff"})
 def get_msg():
     while True:
         try:
