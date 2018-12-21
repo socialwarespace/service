@@ -33,14 +33,31 @@ def add_user(id):
         print(sql)
         data.executeSQL(sql = sql, connection = connection)
         print("iixaaa")
+def subscribe(id):
+    sql = "SELECT subscribe FROM USERS WHERE id = " + str(id)
+    res = data.executeSQL(sql, connection)
+    if res[0][0]==False:
+        sql = "UPDATE USERS SET subscribe = 'True' WHERE id = "+str(id)
+        vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости о наших акциях и не только😉", "keyboard": get_main_keyboard(id, connection)})
+
+    else:
+        sql = "UPDATE USERS SET subscribe = 'False' WHERE id = "+str(id)
+        vk.method("messages.send", {"user_id": id, "message": "Если передумаешь, я буду рад🙃", "keyboard": get_main_keyboard(id, connection)})
+    data.executeSQL(sql, connection)
 
 def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
         print(id)
-        vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\n Я могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection)})
+        vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection)})
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
+    elif pay == "about_us":
+        vk.method("messages.send", {"user_id": id, "message": "Компания 'Прокат Сервис Чита' просто охуенная!\nСкорее бери у нас тачку и будет тебе счастье!\n\nи еще много текстааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааи еще много текстааааааааааааааааааааааааааааааааааааааа", "keyboard":get_main_keyboard(id = id, connection = connection)})
+    
+    elif pay == "subscribe":
+        subscribe(id)
+    
     else: 
         vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю...","keyboard": get_main_keyboard(id = id, connection = connection)})
 def get_msg():
