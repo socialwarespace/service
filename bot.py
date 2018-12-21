@@ -13,7 +13,7 @@ def auth():
     token = token[0:len(token)-1] #need to fix token.txt
     print(token)
     vk = vk_api.VkApi(token=token)
-    #vk._auth_token()
+    vk._auth_token()
     return vk
 #vk.method("messages.send", {"user_id": id, "message": "hj", "keyboard": get_main_keyboard(id =id, connection = connection)})
 def get_main_keyboard(id, connection):
