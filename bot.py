@@ -20,8 +20,9 @@ def add_user(id):
     sql = "SELECT ID FROM USERS WHERE ID = " + str(id)
     res = data.executeSQL(sql = sql, connection = connection)
     if res == 0:
-        sql = "INSERT INTO USERS () VALUES()"
+        sql = "INSERT INTO USERS (id) VALUES(null)"
         data.executeSQL(sql = sql, connection = connection)
+        print("iixaaa")
 
 def data_processing(id, pay, msg):
     add_user(id = id)
