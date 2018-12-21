@@ -25,7 +25,6 @@ def get_main_keyboard(id, connection):
         return key['main_menu_off']
 def add_user(id):
     sql = "SELECT id FROM USERS WHERE id = " + str(id)
-    print(sql)
     res = data.executeSQL(sql = sql, connection = connection)
     if res == 0:
         sql = "INSERT INTO USERS (id) VALUES("+str(id)+")"
@@ -38,6 +37,8 @@ def data_processing(id, pay, msg):
     if pay=='"command":"start"' or pay == "admin":
         print("tut")
         vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?"})
+    elif msg == "Сука":
+        print("aaaaaa")
     else: 
         vk.method("messages.send", {"user_id":id, "message": "ffffffff"})
 def get_msg():
