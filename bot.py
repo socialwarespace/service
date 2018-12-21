@@ -38,8 +38,8 @@ def data_processing(id, pay, msg):
         print(id)
         try:
             vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?"})
-        except vk_api.exceptions.ApiError, e:
-            print(e.code)
+        except vk_api.exceptions.ApiError:
+            print(vk_api.exceptions.ApiError.message)
     elif msg == "admin":
         print("aaaaaa")
     else: 
