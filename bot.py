@@ -63,7 +63,7 @@ def data_processing(id, pay, msg):
         res = data.executeSQL(sql, connection)
         msg = ""
         photos = []
-        int i = 1
+        i = 1
         for car in res:
             msg += str(i)+". Авто: "+str(car[0])+"\n"+"Мощность: "+str(car[1])+"\n"+"Цена: "+str(car[2])+" рублей/день.\n\n"
             i = i+1
