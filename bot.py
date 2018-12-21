@@ -36,8 +36,8 @@ def get_msg():
     while True:
         try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
-            print("tut")
             if messages["count"] >= 1:
+                print("tut")
                 id = messages["items"][0]["last_message"]["from_id"]
                 msg = messages["items"][0]["last_message"]["text"]
                 if "payload" in messages["items"][0]["last_message"]:
@@ -53,7 +53,6 @@ def get_msg():
                     print(msg)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
-            print("tuta")
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
 
