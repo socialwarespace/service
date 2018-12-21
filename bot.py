@@ -16,6 +16,13 @@ def auth():
     vk._auth_token()
     return vk
 #vk.method("messages.send", {"user_id": id, "message": "hj", "keyboard": get_main_keyboard(id =id, connection = connection)})
+def get_main_keyboard(id, connection):
+    sql = "SELECT subscribe FROM USERS WHERE id = "+str(id)
+    res = data.executeSQL(sql = sql, connection = connection)
+    if res[0][0] == True:
+        return key['main_menu_on']
+    else:
+        return key['main_menu_off']
 def add_user(id):
     sql = "SELECT id FROM USERS WHERE id = " + str(id)
     print(sql)
@@ -28,8 +35,10 @@ def add_user(id):
 
 def data_processing(id, pay, msg):
     add_user(id = id)
+    get_main_keyboard(id,connection)
+    print("tut")
     if pay=='"command":"start"' or pay == "admin":
-        vk.method("messages.send", {"user_id":id, "message": "Привет! Я бот Макс.\nЯ представляю лучшую компанию по аренде авто в Чите 'Прокат Сервис Чита'\n Я могу помочь подобрать для тебя авто, рассказать о нашей компании или просто показать все авто, которые ты можешь у нас арендовать!\n Со мной следует общаться посредством графической клавиатуры, так я пока не очень умный бот:) Начем?😎", "keyboard": key['main_menu_on']})
+        vk.method("messages.send", {"user_id": id, "message": "Привет! Я бот Макс.\nЯ представляю лучшую компанию по аренде авто в Чите 'Прокат Сервис Чита'\n Я могу помочь подобрать для тебя авто, рассказать о нашей компании или просто показать все авто, которые ты можешь у нас арендовать!\n Со мной следует общаться посредством графической клавиатуры, так я пока не очень умный бот:) Начем?😎", "keyboard": key['main_menu_on']})
     else: 
         vk.method("messages.send", {"user_id":id, "message": "ffffffff"})
 def get_msg():
