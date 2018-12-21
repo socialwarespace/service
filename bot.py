@@ -28,16 +28,15 @@ def add_user(id):
 def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=={"command":"start"} or pay == "admin":
+        print("???")
         vk.method("messages.send", {"user_id":id, "message": "Привет! Я бот Макс.\nЯ представляю лучшую компанию по аренде авто в Чите 'Прокат Сервис Чита'\n Я могу помочь подобрать для тебя авто, рассказать о нашей компании или просто показать все авто, которые ты можешь у нас арендовать!\n Со мной следует общаться посредством графической клавиатуры, так я пока не очень умный бот:) Начем?😎", "keyboard": key['main_menu_on']})
     else: 
-        print("hjkhjkhjkh")
         vk.method("messages.send", {"user_id":id, "message": "ffffffff"})
 def get_msg():
     while True:
         try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
             if messages["count"] >= 1:
-                print("tut")
                 id = messages["items"][0]["last_message"]["from_id"]
                 msg = messages["items"][0]["last_message"]["text"]
                 if "payload" in messages["items"][0]["last_message"]:
