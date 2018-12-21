@@ -68,6 +68,8 @@ def get_msg():
 key = keyboards.get_keyboards() 
 
 vk = auth()
+server = vk_api.VkApi.server_auth(vk)
+error = vk_api.VkApi.http_handler(vk)
 print("1 ",vk)  
 connection = data.connect()
 print("2 ", connection)
