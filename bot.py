@@ -38,14 +38,13 @@ def subscribe(id):
     res = data.executeSQL(sql, connection)
     if res[0][0]==False:
         sql = "UPDATE USERS SET subscribe = True WHERE id = "+str(id)
+        data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости о наших акциях и не только😉", "keyboard": get_main_keyboard(id, connection)})
 
     else:
         sql = "UPDATE USERS SET subscribe = False WHERE id = "+str(id)
+        data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Если передумаешь, я буду рад🙃", "keyboard": get_main_keyboard(id, connection)})
-    print(sql)
-    res = data.executeSQL(sql, connection)
-    print(res)
 
 def data_processing(id, pay, msg):
     add_user(id = id)
