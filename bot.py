@@ -36,12 +36,9 @@ def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
         print(id)
-        try:
-            vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?"})
-        except vk_api.exceptions.ApiError:
-            print(vk_api.exceptions.ApiError.message)
+        vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?"})
     elif msg == "admin":
-        print("aaaaaa")
+        vk.method("messages.send", {"user_id":id, "message": "ffffffff", "keyboard": key['start']})
     else: 
         vk.method("messages.send", {"user_id":id, "message": "ffffffff", "keyboard": key['start']})
 def get_msg():
