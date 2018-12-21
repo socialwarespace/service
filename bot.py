@@ -55,10 +55,10 @@ def get_msg():
                     except ValueError:
                         pass
                     finally:
-                        print(pay)
+                        print("pay: ",pay)
                 else:
                     pay = "0"
-                    print(msg)
+                    print("msg: ", msg)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
