@@ -18,6 +18,7 @@ def auth():
 #vk.method("messages.send", {"user_id": id, "message": "hj", "keyboard": get_main_keyboard(id =id, connection = connection)})
 def add_user(id):
     sql = "SELECT id FROM USERS WHERE id = " + str(id)
+    print(sql)
     res = data.executeSQL(sql = sql, connection = connection)
     if res == 0:
         sql = "INSERT INTO USERS (id) VALUES("+str(id)+")"
