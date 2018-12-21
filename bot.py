@@ -50,6 +50,7 @@ def get_msg():
                     print(msg)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
+            print("tuta")
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
 
