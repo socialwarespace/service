@@ -58,7 +58,17 @@ def data_processing(id, pay, msg):
     
     elif pay == "subscribe":
         subscribe(id)
-    
+    elif pay == "show_auto":
+        sql = "select name, power, price, img from CARS"
+        res = data.executeSQL(sql, connection)
+        msg = ""
+        photos = []
+        for car in res:
+            msg += "Авто: "+str(car[0])+"\n"+"Мощность: "+str(car[1])+"\n"+"Цена: "+str(car[2])+" рублей/день.\n"
+            photos.append(car[3])
+        vk.method("messages.send", {"user_id": id, "message": msg, "keyboard":get_main_keyboard(id, connection)})
+            
+
     else: 
         vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю...","keyboard": get_main_keyboard(id = id, connection = connection)})
 def get_msg():

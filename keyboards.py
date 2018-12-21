@@ -38,9 +38,6 @@ def get_keyboards():
                 get_button(label="Узнать о нас",color="default", payload="about_us")
             ],
             [
-                get_button(label="Подобрать авто",color="default", payload="choice_auto")
-            ],
-            [
                 get_button(label="Посмотреть все авто",color="default", payload="show_auto")
             ]
         ]
@@ -55,9 +52,6 @@ def get_keyboards():
             ],
             [
                 get_button(label="Узнать о нас",color="default", payload="about us")
-            ],
-            [
-                get_button(label="Подобрать авто",color="default", payload="choice_auto")
             ],
             [
                 get_button(label="Посмотреть все авто",color="default", payload="show_auto")
