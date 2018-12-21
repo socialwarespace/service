@@ -4,6 +4,8 @@
 import vk_api
 import json
 import getter
+import requests
+import sys
 import time
 import keyboards
 import database as data
