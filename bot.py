@@ -10,7 +10,7 @@ import database as data
 
 def auth():
     token = getter.get_token()
-    token = token[0:len(token)-2])#need to fix token.txt
+    token = token[0:len(token)-2] #need to fix token.txt
     vk = vk_api.VkApi(token=token)
     vk._auth_token()
     return vk
