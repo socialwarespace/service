@@ -39,6 +39,8 @@ def data_processing(id, pay, msg):
     if pay=='"command":"start"' or pay == "admin":
         print(id)
         vk.method("messages.send", {"user_id": id, "message": "А как подобрать напрваление?"})
+    elif msg=="admin":
+        vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     else: 
         vk.method("messages.send", {"user_id":id, "message": "ffffffff"})
 def get_msg():
@@ -63,7 +65,6 @@ def get_msg():
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
-
 vk = auth()
 #error = vk_api.VkApi.http_handler(1)
 print("1 ",vk)  
