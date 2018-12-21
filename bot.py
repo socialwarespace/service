@@ -58,6 +58,7 @@ def data_processing(id, pay, msg):
     
     elif pay == "subscribe":
         subscribe(id)
+    
     elif pay == "show_auto":
         sql = "select name, power, price, img from CARS"
         res = data.executeSQL(sql, connection)
