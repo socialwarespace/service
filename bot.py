@@ -10,7 +10,7 @@ import database as data
 
 def auth():
     token = getter.get_token()
-    print(token)
+    print(token[1,len(token)-2])
     vk = vk_api.VkApi(token=token)
     vk._auth_token()
     return vk
@@ -53,7 +53,7 @@ def get_msg():
 key = keyboards.get_keyboards() 
 
 vk = auth()
-print(vk)  
+print("1 ",vk)  
 connection = data.connect()
-print(connection)
+print("2 ", connection)
 get_msg()
