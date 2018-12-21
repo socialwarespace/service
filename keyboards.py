@@ -35,7 +35,7 @@ def get_keyboards():
                 get_button(label="Отписаться от новостей",color="default", payload="subscribe")
             ],
             [
-                get_button(label="Узнать о нас",color="default", payload="about us")
+                get_button(label="Узнать о нас",color="default", payload="about_us")
             ],
             [
                 get_button(label="Подобрать авто",color="default", payload="choice_auto")
