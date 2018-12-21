@@ -63,8 +63,10 @@ def data_processing(id, pay, msg):
         res = data.executeSQL(sql, connection)
         msg = ""
         photos = []
+        int i = 1
         for car in res:
-            msg += "Авто: "+str(car[0])+"\n"+"Мощность: "+str(car[1])+"\n"+"Цена: "+str(car[2])+" рублей/день.\n"
+            msg += str(i)+". Авто: "+str(car[0])+"\n"+"Мощность: "+str(car[1])+"\n"+"Цена: "+str(car[2])+" рублей/день.\n\n"
+            i = i+1
             photos.append(car[3])
         vk.method("messages.send", {"user_id": id, "message": msg, "keyboard":get_main_keyboard(id, connection)})
             
