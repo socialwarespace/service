@@ -55,6 +55,7 @@ def get_photos(directories, type):
             files.append(allow_files[allow_files.index('main.png')])
         else:
             files = allow_files
+    print("files: ",files)
     return upload.photo_messages(files)
 
 def get_attachment(photos):
