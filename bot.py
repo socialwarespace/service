@@ -6,6 +6,7 @@ import json
 import getter
 import requests
 import sys
+import os
 import time
 import keyboards
 import database as data
@@ -46,20 +47,28 @@ def subscribe(id):
         data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Если передумаешь, я буду рад🙃", "keyboard": get_main_keyboard(id, connection)})
 
+def get_photos(directories, type):
+    files = []
+    for directory in directories:
+        allow_files = os.listdir(directory)
+        if type == 'main':
+            files.append(allow_files[allow_files.index('main.png')])
+        else:
+            files = allow_files
+    return upload.photo_messages(files)
+
+def get_attachment(photos):
+    attachment = ""
+    for photo in photos:
+        attachment = attachment + "photo"+str(photo['owner_id'])+"_"+str(photo['id'])+","
+    return attachment[0:len(attachment)-1]
+
+
 def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
-        files = []
-        files.append("img/fan.jpg")
-        files.append("img/flue.jpg")
-        res = upload.photo_messages(files)
-        attachment = ""
-        for r in res:
-            print(r)
-            attachment = attachment + "photo"+str(r['owner_id'])+"_"+str(r['id'])+","
-        attachment = attachment[0:len(attachment)-1]
-        print(attachment)
-        vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection), "attachment": attachment})
+        photos = get_photos(["img/es300"], "main")
+        vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection), "attachment": get_attachment(photos)})
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     elif pay == "about_us":
