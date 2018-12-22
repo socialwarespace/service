@@ -55,6 +55,7 @@ def data_processing(id, pay, msg):
         res = upload.photo_messages(files)
         attachment = ""
         for r in res:
+            print(r)
             attachment = attachment + "photo"+str(r['owner_id'])+"_"+str(r['media_id'])+","
         attachment = attachment[0:len(attachment)-1]
         print(attachment)
