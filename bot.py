@@ -48,12 +48,13 @@ def subscribe(id):
         vk.method("messages.send", {"user_id": id, "message": "Если передумаешь, я буду рад🙃", "keyboard": get_main_keyboard(id, connection)})
 
 def get_photos(directories, type):
-    print("tut")
     files = []
     for directory in directories:
+        print(directory)
         allow_files = os.listdir(directory)
+        print(allow_files)
         if type == 'main':
-            files.append(allow_files[allow_files.index('main.png')])
+            files.append(allow_files[allow_files.index('main.jpg')])
         else:
             files = allow_files
     print("files: ",files)
