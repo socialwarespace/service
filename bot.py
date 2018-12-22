@@ -49,7 +49,9 @@ def subscribe(id):
 def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
-        print(id)
+        photo_path = "/home/DaTo/service/img/fan.png"
+        photo = upload.photo_messages(photo_path)
+        print(photo)
         vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection)})
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
@@ -97,6 +99,7 @@ def get_msg():
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
 vk = auth()
+upload = vk_api.upload.VkUpload(vk)
 #error = vk_api.VkApi.http_handler(1)
 print("1 ",vk)  
 connection = data.connect()
