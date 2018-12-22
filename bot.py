@@ -49,7 +49,8 @@ def subscribe(id):
 def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
-        files  = "img/fan.png"
+        files  = open("img/fan.jpg", "rb")
+        print(files)
         url = vk.method('photos.getMessagesUploadServer')['upload_url']
         print(url)
         response = vk.http.post(url, files)
