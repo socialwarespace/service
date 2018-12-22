@@ -57,7 +57,9 @@ def data_processing(id, pay, msg):
         #print(response.json())
         #photo = vk.method('photos.saveMessagesPhoto', response.json())
         #print(photo)
-        files = "img/fan.jpg"
+        files = []
+        files.append("img/fan.jpg")
+        files.append("img/flue.jpg")
         res = upload.photo_messages(files)
         print(res)
         vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection)})
