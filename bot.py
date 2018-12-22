@@ -54,7 +54,7 @@ def get_photos(directories, type):
         allow_files = os.listdir(directory)
         print(allow_files)
         if type == 'main':
-            files.append(allow_files[allow_files.index('main.jpg')])
+            files.append(allow_files[allow_files.index('main.jpeg')])
         else:
             files = allow_files
     print("files: ",files)
