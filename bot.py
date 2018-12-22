@@ -49,7 +49,7 @@ def subscribe(id):
 def data_processing(id, pay, msg):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
-        files = open("img/fan.png")
+        files = open("img/fan.png", "r")
         print(files)
         photo = upload.photo_messages(files)
         print(photo)
