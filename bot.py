@@ -77,7 +77,9 @@ def data_processing(id, pay, msg):
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     elif pay == "about_us":
-        vk.method("messages.send", {"user_id": id, "message": "Компания 'Прокат Сервис Чита' просто охуенная!\nСкорее бери у нас тачку и будет тебе счастье!\n\nи еще много текстааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааи еще много текстааааааааааааааааааааааааааааааааааааааа", "keyboard":get_main_keyboard(id = id, connection = connection)})
+        about = open("info/about.txt")
+        msg = about.read()
+        vk.method("messages.send", {"user_id": id, "message": msg, "keyboard":get_main_keyboard(id = id, connection = connection)})
     
     elif pay == "subscribe":
         subscribe(id)
