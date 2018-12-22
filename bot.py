@@ -54,10 +54,10 @@ def get_photos(directories, type):
         allow_files = os.listdir(directory)
         print(allow_files)
         if type == 'main':
-            files.append(directory+allow_files[allow_files.index('main.jpeg')])
+            files.append(directory+"/"+allow_files[allow_files.index('main.jpeg')])
         else:
             for f in allow_files:
-                files.append(directory+f)
+                files.append(directory+"/"+f)
     print("files: ",files)
     return upload.photo_messages(files)
 
