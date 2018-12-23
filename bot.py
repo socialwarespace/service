@@ -217,6 +217,7 @@ def data_processing(id, pay, msg):
             directories = []
             #select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img
             for car in cars:
+                print("В форе ", "i", " раз!")
                 directories.append(car[7])
                 s = s+str(i)+"."+str(car[0])+" "+str(car[1])+"\n"
                 s = s+"Объем "+str(car[2])+" литра\n"
