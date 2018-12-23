@@ -70,7 +70,7 @@ def get_attachment(photos):
 def get_auto(state):
     sql = ""
     if state[6] == "<10":
-        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price from CARS"
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img from CARS"
         if state[5] == "<2000":
             sql = sql + " where normal_price < 2000"
         elif state[5] == "2000-3000":
@@ -201,9 +201,27 @@ def data_processing(id, pay, msg):
         sql = "select * from USERS_CARS where id = " + str(id)
         res = data.executeSQL(sql, connection)
         cars = get_auto(res[0])
-        for car in cars:
-            print(car)
-        vk.method("messages.send", {"user_id": id, "message": "Вот так!", "keyboard": get_main_keyboard(id, connection)})     
+        if cars != 0:
+            i = 1
+            s = ""
+            #select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img
+            for car in cars:
+                s = s+str(i)+str(car[0])+" "+str(car[1])+"\n"
+                s = s+"Объем "+str(car[2])+" литра\n"
+                if car[3] == "front":
+                    s = s+"Передний привод,"
+                elif car[3] == "back":
+                    s = s+"Задний привод,"
+                if car[4] == "left":
+                    s = s+" левый руль,"
+                elif car[4] == "right":
+                    s = s+" правый руль,"
+                s = s+str(car[5])+" мест\n"
+                s = s+"Цена: "+str(car[6])+" рублей/день"
+                i = i+1
+            vk.method("messages.send", {"user_id": id, "message":"Вот, что нашел:\n"+s, "keyboard": get_main_keyboard(id, connection)})
+        else:        
+            vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
 
     else: 
         vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю...","keyboard": get_main_keyboard(id = id, connection = connection)})
