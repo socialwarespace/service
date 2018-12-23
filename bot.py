@@ -67,6 +67,16 @@ def get_attachment(photos):
         attachment = attachment + "photo"+str(photo['owner_id'])+"_"+str(photo['id'])+","
     return attachment[0:len(attachment)-1]
 
+def get_auto_temp(state):
+    sql = ""
+    if state[6] == "<10":
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img from CARS"
+    elif state[6] == "10-20":
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, good_price, img from CARS"
+    elif state[6] == ">20":
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price, img from CARS"
+    if state[1]!=None:
+        sql = sql + " and type = '" + str(state[1]) + "'"
 def get_auto(state):
     sql = ""
     if state[6] == "<10":
