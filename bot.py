@@ -73,25 +73,25 @@ def get_auto(state):
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price from CARS"
         if state[5] == "<2000":
             sql = sql + " where normal_price < 2000"
-        elif state[5] == "2000-3000"
+        elif state[5] == "2000-3000":
             sql = sql + " where normal_price >= 2000 and normal_price < 3000"
-        elif state[5] == ">3000"
+        elif state[5] == ">3000":
             sql = sql + " where normal_price >= 2000"
     elif state[6] == "10-20":
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, good_price from CARS"
         if state[5] == "<2000":
             sql = sql + " where good_price < 2000"
-        elif state[5] == "2000-3000"
+        elif state[5] == "2000-3000":
             sql = sql + " where good_price >= 2000 and normal_price < 3000"
-        elif state[5] == ">3000"
+        elif state[5] == ">3000":
             sql = sql + " where good_price >= 2000"
     elif state[6] == ">20":
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price from CARS"
         if state[5] == "<2000":
             sql = sql + " where perfect_price < 2000"
-        elif state[5] == "2000-3000"
+        elif state[5] == "2000-3000":
             sql = sql + " where perfect_price >= 2000 and normal_price < 3000"
-        elif state[5] == ">3000"
+        elif state[5] == ">3000":
             sql = sql + " where perfect_price >= 2000"
     sql = sql + " and type = '" + str(state[1]) + "'"
     sql = sql + " and drive_unit = '"+str(state[2])+"'"
