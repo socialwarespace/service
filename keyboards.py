@@ -166,7 +166,7 @@ def get_keyboards():
             ]
         ]
     }
-    
+    keyboard_how_long = convertToString(keyboard_how_long)
     return {
         'start': keyboard_start,
         'main_menu_on': keyboard_main_menu_on,
@@ -175,5 +175,6 @@ def get_keyboards():
         'drive_unit': keyboard_drive_unit,
         'volume': keyboard_volume,
         'steering': keyboard_steering,
-        'price': keyboard_price
+        'price': keyboard_price,
+        'how_long':keyboard_how_long
     }
