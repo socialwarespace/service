@@ -84,18 +84,21 @@ def data_processing(id, pay, msg):
     elif pay == "subscribe":
         subscribe(id)
     
-    elif pay == "show_auto":
-        sql = "select name, power, price, img from CARS"
-        res = data.executeSQL(sql, connection)
-        msg = ""
-        photos = []
-        i = 1
-        for car in res:
-            msg += str(i)+". Авто: "+str(car[0])+"\n"+"Мощность: "+str(car[1])+"\n"+"Цена: "+str(car[2])+" рублей/день.\n\n"
-            i = i+1
-            photos.append(car[3])
-        vk.method("messages.send", {"user_id": id, "message": msg, "keyboard":get_main_keyboard(id, connection), "attachment": str(photos[0])+","+str(photos[1])+","+str(photos[2])})
-            
+    elif pay == "selection":
+        vk.method("messages.send", {"user_id": id, "message": "Какой авто Вас интересует?", "keyboard": key['type']})
+    
+    elif pay == "drive_unit":
+        vk.method("messages.send", {"user_id": id, "message": "Какой привод нужен?", "keyboard": key['drive_unit']})
+    elif pay == "volume":
+        vk.method("messages.send", {"user_id": id, "message": "Какой объем двигателя хотите?", "keyboard": key['volume']})
+    elif pay == "steering":
+        vk.method("messages.send", {"user_id": id, "message": "Какой руль?", "keyboard": key['steering']})
+    elif pay == "price":
+        vk.method("messages.send", {"user_id": id, "message": "Какая цена Вас устроит?", "keyboard": key['price']})
+    elif pay == "how_long":
+        vk.method("messages.send", {"user_id": id, "message": "На какой срок планируете брать авто? От этого зависит цена.", "keyboard": key['how_long']})
+    elif pay == "finish_selection":
+        vk.method("messages.send", {"user_id": id, "message": "Вот так!", "keyboard": get_main_keyboard()})     
 
     else: 
         vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю...","keyboard": get_main_keyboard(id = id, connection = connection)})
@@ -112,11 +115,14 @@ def get_msg():
                         pay = bytes(pay, 'cp1251').decode('utf-8')
                     except ValueError:
                         pass
-                    finally:
-                        print("pay: ",pay)
+                    try:
+                        msg = bytes(pay, 'cp1251').decode('utf-8')
+                    except ValueError:
+                        pass    
                 else:
                     pay = "0"
-                    print("msg: ", msg)
+                print("pay: ",pay)
+                print("msg: ",msg)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)

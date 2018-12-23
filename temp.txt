@@ -1,0 +1,17 @@
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Vitz', 1.0, 'front', 5, 'right', 'img/vitz');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Funcargo', 1.5, 'front', 5, 'right', 'img/funcargo');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Honda', 'Airwave', 1.5, 'front', 5, 'right', 'img/airwave');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Prius', 1.5, 'front', 5, 'right', 'img/prius20');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Nissan', 'Almera Classic', 1.6, 'front', 5, 'left', 'img/almera_classic');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Honda', 'Civic', 1.8, 'front', 5, 'left', 'img/civic');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Renault', 'Fluence', 1.6, 'front', 5, 'left', 'img/fluence');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Lexus', 'ES300', 3.0, 'front', 5, 'left', 'img/es300');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Honda', 'CR-V', 2.0, 'front', 5, 'right', 'img/crv');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'RAV-4', 1.8, 'front', 5, 'right', 'img/rav4');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Lexus', 'RX400h', 3.3, '4wd', 5, 'left', 'img/rx400h');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Land Cruiser 100', 4.7, '4wd', 5, 'right', 'img/land_cruiser100');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Estima', 2.4, '4wd', 7, 'right', 'img/estima');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Alphard', 3.0, '4wd', 8, 'right', 'img/alphard');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Grand Hiace', 3.4, '4wd', 7, 'right', 'img/grand_hiace');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Prius', 1.8, 'front', 5, 'right', 'img/prius30');
+insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Lexus', 'LX470', 4.7, '4wd', 5, 'left', 'img/lx470');
