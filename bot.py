@@ -201,14 +201,27 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Какая цена Вас устроит?", "keyboard": key['price']})
     
     elif pay == "how_long":
-        if msg == "До 2000 рублей/сутки":
-            sql = "update USERS_CARS set price = '<2000' where id = "+str(id)
+       # if msg == "До 2000 рублей/сутки":
+       #     sql = "update USERS_CARS set price = '<2000' where id = "+str(id)
+       #     data.executeSQL(sql, connection)
+       # elif msg == "От 2000 до 3000 рублей/сутки":
+       #     sql = "update USERS_CARS set price = '2000-3000' where id = "+str(id)
+       #     data.executeSQL(sql, connection)
+       # elif msg == "От 3000 рублей/сутки":
+       #     sql = "update USERS_CARS set price = '>3000' where id = "+str(id)
+       #     data.executeSQL(sql, connection)
+
+        if msg == "Минивэн":
+            sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'minivan')"
             data.executeSQL(sql, connection)
-        elif msg == "От 2000 до 3000 рублей/сутки":
-            sql = "update USERS_CARS set price = '2000-3000' where id = "+str(id)
+        elif msg == "Легковой авто":
+            sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'passenger')"
             data.executeSQL(sql, connection)
-        elif msg == "От 3000 рублей/сутки":
-            sql = "update USERS_CARS set price = '>3000' where id = "+str(id)
+        elif msg == "Внедорожник":
+            sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'suv')"
+            data.executeSQL(sql, connection)
+        elif msg =="Неважно":
+            sql = "insert into USERS_CARS (id) values("+str(id)+")"
             data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "На какой срок планируете брать авто? От этого зависит цена.", "keyboard": key['how_long']})
     
