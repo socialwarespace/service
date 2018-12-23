@@ -122,8 +122,9 @@ def get_msg():
                         pass    
                 else:
                     pay = "0"
-                print("pay: ",pay)
-                print("msg: ",msg)
+                print("pay: ", pay)
+                print("msg: ", msg)
+                print(messages["items"][0]["last_message"]["text"])
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
