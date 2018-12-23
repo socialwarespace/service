@@ -123,7 +123,7 @@ def get_msg():
                     pay = "0"
                 print("pay: ", pay)
                 print("msg: ", msg)
-                data_processing(id=id, pay=pay, msg=msg)
+                data_processing(id=id, pay=pay, msg=msg.lovercase())
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
