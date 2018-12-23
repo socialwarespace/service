@@ -109,6 +109,7 @@ def get_msg():
             if messages["count"] >= 1:
                 id = messages["items"][0]["last_message"]["from_id"]
                 msg = messages["items"][0]["last_message"]["text"]
+                ms = messages["items"][0]["last_message"]["label"]
                 if "payload" in messages["items"][0]["last_message"]:
                     pay = messages["items"][0]["last_message"]["payload"][1:-1]
                     try:
@@ -123,6 +124,7 @@ def get_msg():
                     pay = "0"
                 print("pay: ",pay)
                 print("msg: ",msg)
+                print("ms: ",ms)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
