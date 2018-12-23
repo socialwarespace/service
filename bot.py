@@ -204,8 +204,10 @@ def data_processing(id, pay, msg):
         if cars != 0:
             i = 1
             s = ""
+            directories = []
             #select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img
             for car in cars:
+                directories.append(car[7])
                 s = s+str(i)+"."+str(car[0])+" "+str(car[1])+"\n"
                 s = s+"Объем "+str(car[2])+" литра\n"
                 if car[3] == "front":
@@ -219,7 +221,8 @@ def data_processing(id, pay, msg):
                 s = s+" "+str(car[5])+" мест\n"
                 s = s+"Цена: "+str(car[6])+" рублей/день\n\n"
                 i = i+1
-            vk.method("messages.send", {"user_id": id, "message":"Вот, что нашел:\n"+s, "keyboard": get_main_keyboard(id, connection)})
+            photos = get_photos(directories, "main")
+            vk.method("messages.send", {"user_id": id, "message":"Вот, что нашел:\n\n"+s, "keyboard": get_main_keyboard(id, connection), "attachment": get_attachment(photos)})
         else:        
             vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
 
