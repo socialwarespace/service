@@ -109,6 +109,7 @@ def get_msg():
             if messages["count"] >= 1:
                 id = messages["items"][0]["last_message"]["from_id"]
                 msg = messages["items"][0]["last_message"]["text"]
+                print(msg)
                 if "payload" in messages["items"][0]["last_message"]:
                     pay = messages["items"][0]["last_message"]["payload"][1:-1]
                     try:
