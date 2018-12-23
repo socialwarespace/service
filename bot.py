@@ -157,7 +157,7 @@ def data_processing(id, pay, msg):
         sql = "select * from USERS_CARS where id = " + str(id)
         res = data.executeSQL(sql, connection)
         for r in res:
-            print(r[0])
+            print(r)
         vk.method("messages.send", {"user_id": id, "message": "Вот так!", "keyboard": get_main_keyboard(id, connection)})     
 
     else: 

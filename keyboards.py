@@ -156,13 +156,13 @@ def get_keyboards():
         "one_time": True,
         "buttons":[
             [
-                get_button(label="До десяти дней.",color="default", payload="finish_selection")
+                get_button(label="До десяти дней",color="default", payload="finish_selection")
             ],
             [
-                get_button(label="От десяти до двадцати дней.",color="default", payload="finish_selection")
+                get_button(label="От десяти до двадцати дней",color="default", payload="finish_selection")
             ],
             [
-                get_button(label="От двадцати одного дня.",color="default", payload="finish_selection")
+                get_button(label="От двадцати одного дня",color="default", payload="finish_selection")
             ]
         ]
     }
