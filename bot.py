@@ -67,6 +67,45 @@ def get_attachment(photos):
         attachment = attachment + "photo"+str(photo['owner_id'])+"_"+str(photo['id'])+","
     return attachment[0:len(attachment)-1]
 
+def get_auto(state):
+    sql = ""
+    if state[6] == "<10":
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price from CARS"
+        if state[5] == "<2000":
+            sql = sql + " where normal_price < 2000"
+        elif state[5] == "2000-3000"
+            sql = sql + " where normal_price >= 2000 and normal_price < 3000"
+        elif state[5] == ">3000"
+            sql = sql + " where normal_price >= 2000"
+    elif state[6] == "10-20":
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, good_price from CARS"
+        if state[5] == "<2000":
+            sql = sql + " where good_price < 2000"
+        elif state[5] == "2000-3000"
+            sql = sql + " where good_price >= 2000 and normal_price < 3000"
+        elif state[5] == ">3000"
+            sql = sql + " where good_price >= 2000"
+    elif state[6] == ">20":
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price from CARS"
+        if state[5] == "<2000":
+            sql = sql + " where perfect_price < 2000"
+        elif state[5] == "2000-3000"
+            sql = sql + " where perfect_price >= 2000 and normal_price < 3000"
+        elif state[5] == ">3000"
+            sql = sql + " where perfect_price >= 2000"
+    sql = sql + " and type = '" + str(state[1]) + "'"
+    sql = sql + " and drive_unit = '"+str(state[2])+"'"
+    if state[3] == "<2":
+        sql = sql+" and volume < 2"
+    elif state[3] == "2-3":
+        sql = sql +" and volume >= 2 and volume <3"
+    elif state[3] == ">3":
+        sql = sql +" and volume >=3"
+    sql = sql + " and steering = '"+str(state[4])+"'"
+    print(sql)
+    return data.executeSQL(sql, connection)
+
+
 
 def data_processing(id, pay, msg):
     add_user(id = id)
@@ -103,6 +142,7 @@ def data_processing(id, pay, msg):
             sql = "insert into USERS_CARS (id) values("+str(id)+")"
             data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Какой привод нужен?", "keyboard": key['drive_unit']})
+    
     elif pay == "volume":
         if msg == "Передний":
             sql = "update USERS_CARS set drive_unit = 'front' where id = "+str(id)
@@ -114,6 +154,7 @@ def data_processing(id, pay, msg):
             sql = "update USERS_CARS set drive_unit = '4wd' where id = "+str(id)
             data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Какой объем двигателя хотите?", "keyboard": key['volume']})
+    
     elif pay == "steering":
         if msg == "До двух литров":
             sql = "update USERS_CARS set volume = '<2' where id = "+str(id)
@@ -125,6 +166,7 @@ def data_processing(id, pay, msg):
             sql = "update USERS_CARS set volume = '>3' where id = "+str(id)
             data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Какой руль?", "keyboard": key['steering']})
+    
     elif pay == "price":
         if msg == "Левый":
             sql = "update USERS_CARS set steering = 'left' where id = "+str(id)
@@ -133,6 +175,7 @@ def data_processing(id, pay, msg):
             sql = "update USERS_CARS set steering = 'right' where id = "+str(id)
             data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Какая цена Вас устроит?", "keyboard": key['price']})
+    
     elif pay == "how_long":
         if msg == "До 2000 рублей/сутки":
             sql = "update USERS_CARS set price = '<2000' where id = "+str(id)
@@ -144,6 +187,7 @@ def data_processing(id, pay, msg):
             sql = "update USERS_CARS set price = '>3000' where id = "+str(id)
             data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "На какой срок планируете брать авто? От этого зависит цена.", "keyboard": key['how_long']})
+    
     elif pay == "finish_selection":
         if msg == "До десяти дней":
             sql = "update USERS_CARS set how_long = '<10' where id = "+str(id)
@@ -156,8 +200,9 @@ def data_processing(id, pay, msg):
             data.executeSQL(sql, connection)
         sql = "select * from USERS_CARS where id = " + str(id)
         res = data.executeSQL(sql, connection)
-        for r in res:
-            print(r)
+        cars = get_auto(res[0])
+        for car in cars:
+            print(car)
         vk.method("messages.send", {"user_id": id, "message": "Вот так!", "keyboard": get_main_keyboard(id, connection)})     
 
     else: 
