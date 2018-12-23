@@ -210,6 +210,7 @@ def data_processing(id, pay, msg):
         sql = "select * from USERS_CARS where id = " + str(id)
         res = data.executeSQL(sql, connection)
         cars = get_auto(res[0])
+        print("ВЫШЕЛ!")
         if cars != 0:
             i = 1
             s = ""
