@@ -80,7 +80,7 @@ def get_auto(state):
         else:
             sql = sql + " where 1<2"
     elif state[6] == "10-20":
-        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, good_price from CARS"
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, good_price, img from CARS"
         if state[5] == "<2000":
             sql = sql + " where good_price < 2000"
         elif state[5] == "2000-3000":
@@ -90,7 +90,7 @@ def get_auto(state):
         else:
             sql = sql + " where 1<2"
     elif state[6] == ">20":
-        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price from CARS"
+        sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price, img from CARS"
         if state[5] == "<2000":
             sql = sql + " where perfect_price < 2000"
         elif state[5] == "2000-3000":
