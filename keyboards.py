@@ -64,16 +64,16 @@ def get_keyboards():
         "one_time": True,
         "buttons":[
             [
-                get_button(label="Легковой авто",color="default", payload="how_long") #drive_unit
+                get_button(label="Легковой авто",color="default", payload="finish_selection") #drive_unit
             ],
             [
-                get_button(label="Минивэн",color="default", payload="how_long")
+                get_button(label="Минивэн",color="default", payload="finish_selection")
             ],
             [
-                get_button(label="Внедорожник",color="default", payload="how_long")
+                get_button(label="Внедорожник",color="default", payload="finish_selection")
             ],
             [
-                get_button(label="Неважно",color="default", payload="how_long")
+                get_button(label="Неважно",color="default", payload="finish_selection")
             ]
         ]
     }
