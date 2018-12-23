@@ -226,7 +226,7 @@ def data_processing(id, pay, msg):
                 s = s+str(car[5])+" мест\n"
                 s = s+"Цена: "+str(car[6])+" рублей/день\n\n"
                 i = i+1
-                if i % 11 == 0:
+                if i % 8 == 0:
                     photos = get_photos(directories, "main")
                     vk.method("messages.send", {"user_id": id, "message":s, "attachment": get_attachment(photos)})
                     directories = []
