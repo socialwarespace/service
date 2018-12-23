@@ -98,7 +98,7 @@ def data_processing(id, pay, msg):
     elif pay == "how_long":
         vk.method("messages.send", {"user_id": id, "message": "На какой срок планируете брать авто? От этого зависит цена.", "keyboard": key['how_long']})
     elif pay == "finish_selection":
-        vk.method("messages.send", {"user_id": id, "message": "Вот так!", "keyboard": get_main_keyboard()})     
+        vk.method("messages.send", {"user_id": id, "message": "Вот так!", "keyboard": get_main_keyboard(id, connection)})     
 
     else: 
         vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю...","keyboard": get_main_keyboard(id = id, connection = connection)})
