@@ -108,21 +108,20 @@ def get_msg():
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
             if messages["count"] >= 1:
                 id = messages["items"][0]["last_message"]["from_id"]
+                msg = messages["items"][0]["last_message"]["text"]
                 if "payload" in messages["items"][0]["last_message"]:
                     pay = messages["items"][0]["last_message"]["payload"][1:-1]
                     try:
                         pay = bytes(pay, 'cp1251').decode('utf-8')
                     except ValueError:
-                        pass  
+                        pass
+                    try:
+                        msg = bytes(msg, 'cp1251').decode('utf-8')
+                    except ValueError:
+                        pass    
                 else:
                     pay = "0"
                 print("pay: ", pay)
-                msg = messages["items"][0]["last_message"]["text"]
-                print("msg: ", msg)
-                try:
-                    msg = bytes(pay, 'cp1251').decode('utf-8')
-                except ValueError:
-                    pass  
                 print("msg: ", msg)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
