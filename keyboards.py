@@ -10,7 +10,7 @@ def get_button(label, color,payload=""):
         {
             "type":"text",
             "payload":json.dumps(payload),
-            "label":label
+            "label": '"'+str(label)+'"'
         },
         "color": color
     }
