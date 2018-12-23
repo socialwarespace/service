@@ -77,6 +77,11 @@ def get_auto_temp(state):
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price, img from CARS"
     if state[1]!=None:
         sql = sql + " and type = '" + str(state[1]) + "'"
+    print(sql)
+    return data.executeSQL(sql, connection)
+
+
+    
 def get_auto(state):
     sql = ""
     if state[6] == "<10":
@@ -219,7 +224,7 @@ def data_processing(id, pay, msg):
             data.executeSQL(sql, connection)
         sql = "select * from USERS_CARS where id = " + str(id)
         res = data.executeSQL(sql, connection)
-        cars = get_auto(res[0])
+        cars = get_auto_temp(res[0])
         print("ВЫШЕЛ!")
         if cars != 0:
             i = 1
