@@ -230,9 +230,11 @@ def data_processing(id, pay, msg):
                     photos = get_photos(directories, "main")
                     vk.method("messages.send", {"user_id": id, "message":s, "attachment": get_attachment(photos)})
                     directories = []
+                    s = ""
                     print(i, " ", directories)
-            photos = get_photos(directories, "main")
-            vk.method("messages.send", {"user_id": id, "message":s, "keyboard": get_main_keyboard(id, connection), "attachment": get_attachment(photos)})
+            if s != "":
+                photos = get_photos(directories, "main")
+                vk.method("messages.send", {"user_id": id, "message":s, "keyboard": get_main_keyboard(id, connection), "attachment": get_attachment(photos)})
         else:        
             vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
 
