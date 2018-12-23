@@ -72,7 +72,7 @@ def get_auto(state):
     for i in range(3,7):
         if state[i] == None:
             print(state[i], " ", i)
-            state[i] == "null"
+            state[i] = "null"
     if state[6] == "<10":
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img from CARS"
         if state[5] == "<2000":
