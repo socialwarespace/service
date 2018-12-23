@@ -137,13 +137,13 @@ def get_keyboards():
         "one_time": True,
         "buttons":[
             [
-                get_button(label="До 2000 рублей/сутки.",color="default", payload="how_long")
+                get_button(label="До 2000 рублей/сутки",color="default", payload="how_long")
             ],
             [
-                get_button(label="От 2000 до 3000 рублей/сутки.",color="default", payload="how_long")
+                get_button(label="От 2000 до 3000 рублей/сутки",color="default", payload="how_long")
             ],
             [
-                get_button(label="От 3000 рублей/сутки.",color="default", payload="how_long")
+                get_button(label="От 3000 рублей/сутки",color="default", payload="how_long")
             ],
             [
                 get_button(label="Неважно",color="default", payload="how_long")
