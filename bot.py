@@ -69,10 +69,6 @@ def get_attachment(photos):
 
 def get_auto(state):
     sql = ""
-    for i in range(3,7):
-        if state[i] == None:
-            print(state[i], " ", i)
-            state[i] = "null"
     if state[6] == "<10":
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img from CARS"
         if state[5] == "<2000":
@@ -97,15 +93,18 @@ def get_auto(state):
             sql = sql + " where perfect_price >= 2000 and normal_price < 3000"
         elif state[5] == ">3000":
             sql = sql + " where perfect_price >= 2000"
-    sql = sql + " and type = '" + str(state[1]) + "'"
-    sql = sql + " and drive_unit = '"+str(state[2])+"'"
+    if state[1]!=None:
+        sql = sql + " and type = '" + str(state[1]) + "'"
+    if state[2]!=None:
+        sql = sql + " and drive_unit = '"+str(state[2])+"'"
     if state[3] == "<2":
         sql = sql+" and volume < 2"
     elif state[3] == "2-3":
         sql = sql +" and volume >= 2 and volume <3"
     elif state[3] == ">3":
         sql = sql +" and volume >=3"
-    sql = sql + " and steering = '"+str(state[4])+"'"
+    if state[4]!=None:
+        sql = sql + " and steering = '"+str(state[4])+"'"
     print(sql)
     return data.executeSQL(sql, connection)
 
