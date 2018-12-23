@@ -206,7 +206,7 @@ def data_processing(id, pay, msg):
             s = ""
             #select mark, model, volume, drive_unit, steering, count_of_places, normal_price, img
             for car in cars:
-                s = s+str(i)+str(car[0])+" "+str(car[1])+"\n"
+                s = s+str(i)+"."+str(car[0])+" "+str(car[1])+"\n"
                 s = s+"Объем "+str(car[2])+" литра\n"
                 if car[3] == "front":
                     s = s+"Передний привод,"
@@ -216,8 +216,8 @@ def data_processing(id, pay, msg):
                     s = s+" левый руль,"
                 elif car[4] == "right":
                     s = s+" правый руль,"
-                s = s+str(car[5])+" мест\n"
-                s = s+"Цена: "+str(car[6])+" рублей/день"
+                s = s+" "+str(car[5])+" мест\n"
+                s = s+"Цена: "+str(car[6])+" рублей/день\n\n"
                 i = i+1
             vk.method("messages.send", {"user_id": id, "message":"Вот, что нашел:\n"+s, "keyboard": get_main_keyboard(id, connection)})
         else:        
