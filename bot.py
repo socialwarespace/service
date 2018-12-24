@@ -276,6 +276,7 @@ def data_processing(id, pay, msg):
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.starttls()
             mail = getter.get_mail()
+            mail = mail[0:len(mail)-1]
             print(mail)
             psw = getter.get_mail_password()
             print(psw)

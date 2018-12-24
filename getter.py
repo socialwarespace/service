@@ -18,6 +18,6 @@ def get_mail():
     line = f.readline()
     return line
 def get_mail_password():
-    f = open('/home/DaTo/service/system/mail_pass.txt')
+    f = open('/home/DaTo/service/system/mail_password.txt')
     line = f.readline()
     return line
