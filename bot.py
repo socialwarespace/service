@@ -276,22 +276,39 @@ def data_processing(id, pay, msg):
     elif pay == "connect":
         if msg == "Да, хочу":
             fromaddr = "slamvsem@gmail.com"
-            mypass = "qawsedrf132"
+            mypass = getter.get_mail_password()
+            mypass = mypass[0:len(mypass)-1]
             toaddr = "slamvsem@gmail.com"
  
             msg = MIMEMultipart()
             msg['From'] = fromaddr
             msg['To'] = toaddr
-            msg['Subject'] = "Привет от питона"
+            msg['Subject'] = "Новый клиент!"
  
-            body = "Это пробный текст сообщения"
-            msg.attach(MIMEText(body, 'plain'))
+            m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
+            sql = "select type from USERS_CARS where id = "+str(id)
+            res = data.executeSQL(sql, connection)
+            if res[0][0] == "suv":
+                m = m + "Внедорожника\n"
+            elif res[0][0] == "passenger":
+                m = m + "Легового авто\n"
+            elif res[0][0] == "minivan":
+                m = m+"Минивэна\n"
+            else:
+                m = m+"Любого авто\n"
+            sql = "select how_long from USERS_CARS where id = "+str(id)
+            res = data.executeSQL(sql, connection)
+            if res[0][0] == "<10":
+                m = m + "Планирует брать на срок менее 10 дней"
+            elif res[0][0] == "10-20":
+                m = m + "Планирует брать на срок от 10 до 20 дней"
+            elif res[0][0] == ">20":
+                m = m + "Планирует брать на срок от 21 дня"
+            msg.attach(MIMEText(m, 'plain'))
  
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.starttls()
-            print("1111")
             server.login(fromaddr, mypass)
-            print("2222")
             text = msg.as_string()
             server.sendmail(fromaddr, toaddr, text)
             server.quit()
