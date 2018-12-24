@@ -275,7 +275,9 @@ def data_processing(id, pay, msg):
 def get_msg():
     while True:
         try:
-            messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
+            print("while!")
+            messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unread"})
+            print("new msg ", messages)
             if messages["count"] >= 1:
                 print(messages["count"], " сообщений")
                 for i in range(0, messages["count"]):
@@ -297,8 +299,8 @@ def get_msg():
                     print("pay: ", pay)
                     print("msg: ", msg)
                     print("Запускаю процесс ", id," ", pay," ", msg)
+                    data_processing(id=id, pay=pay, msg=msg)
                 print("Вышел из фор!")
-            data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
