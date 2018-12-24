@@ -297,8 +297,8 @@ def get_msg():
                     print("pay: ", pay)
                     print("msg: ", msg)
                     print("Запускаю процесс ", id," ", pay," ", msg)
-                    data_processing(id=id, pay=pay, msg=msg)
                 print("Вышел из фор!")
+            data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
