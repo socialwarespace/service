@@ -281,7 +281,7 @@ def data_processing(id, pay, msg):
             psw = getter.get_mail_password()
             psw = psw[0:len(psw)-1]
             print(psw)
-            s.login(mail, psw)
+            s.login("slamvsem@gmail.com", "qawsedrf132")
             print("залогинился!")
             m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
             sql = "select type from USERS_CARS where id = "+str(id)
