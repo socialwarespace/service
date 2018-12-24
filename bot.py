@@ -271,7 +271,7 @@ def data_processing(id, pay, msg):
             vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
 
     else: 
-        vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю...","keyboard": get_main_keyboard(id = id, connection = connection)})
+        vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю, используйте графическую клавиатуру!\n Если вы хотите узнать какую-либо информацию лично, пишите Максиму https://vk.com/mazzepa4x4","keyboard": get_main_keyboard(id = id, connection = connection)})
 def get_msg():
     while True:
         try:
