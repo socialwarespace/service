@@ -289,7 +289,9 @@ def data_processing(id, pay, msg):
  
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.starttls()
+            print("1111")
             server.login(fromaddr, mypass)
+            print("2222")
             text = msg.as_string()
             server.sendmail(fromaddr, toaddr, text)
             server.quit()
