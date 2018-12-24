@@ -275,6 +275,10 @@ def data_processing(id, pay, msg):
         if msg == "Да, хочу":
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.starttls()
+            mail = getter.get_mail()
+            print(mail)
+            psw = getter.get_mail_password()
+            print(psw)
             s.login(getter.get_mail(), getter.get_mail_password())
             print("залогинился!")
             m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
