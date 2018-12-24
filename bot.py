@@ -281,7 +281,7 @@ def data_processing(id, pay, msg):
             psw = getter.get_mail_password()
             psw = psw[0:len(psw)-1]
             print(psw)
-            s.login(getter.get_mail(), getter.get_mail_password())
+            s.login(mail, psw)
             print("залогинился!")
             m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
             sql = "select type from USERS_CARS where id = "+str(id)
@@ -302,7 +302,7 @@ def data_processing(id, pay, msg):
                 m = m + "Планирует брать на срок от 10 до 20 дней"
             elif res[0][0] == ">20":
                 m = m + "Планирует брать на срок от 21 дня"
-            s.sendmail(getter.get_mail(), getter.get_mail(), m)
+            s.sendmail(mail, mail, m)
             s.quit()
         elif msg == "Нет, спасибо":
             vk.method("messages.send", {"user_id": id, "message": "Как скажите", "keyboard": get_main_keyboard(id, connection)})
