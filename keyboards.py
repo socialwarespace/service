@@ -167,6 +167,17 @@ def get_keyboards():
         ]
     }
     keyboard_how_long = convertToString(keyboard_how_long)
+    keyboard_connect = {
+        "one_time": True,
+        "buttons":[
+            [
+                get_button(label="Да, хочу",color="default", payload="connect")
+            ],
+            [
+                get_button(label="Нет, спасибо",color="default", payload="connect")
+            ]
+        ]
+    }
     return {
         'start': keyboard_start,
         'main_menu_on': keyboard_main_menu_on,
@@ -176,5 +187,6 @@ def get_keyboards():
         'volume': keyboard_volume,
         'steering': keyboard_steering,
         'price': keyboard_price,
-        'how_long':keyboard_how_long
+        'how_long':keyboard_how_long,
+        'connect': keyboard_connect
     }
