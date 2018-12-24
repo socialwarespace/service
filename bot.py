@@ -296,6 +296,7 @@ def get_msg():
                         pay = "0"
                     print("pay: ", pay)
                     print("msg: ", msg)
+                    print("Запускаю процесс ", id," ", pay," ", msg)
                     data_processing(id=id, pay=pay, msg=msg)
                 print("Вышел из фор!")
         except Exception:
