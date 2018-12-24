@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:fileencoding=utf-8
 import vk_api
+import smtplib
 import json
 import getter
 import requests
@@ -152,54 +153,52 @@ def data_processing(id, pay, msg):
         data.executeSQL(sql, connection)
         vk.method("messages.send", {"user_id": id, "message": "Какой авто Вас интересует?", "keyboard": key['type']})
     
-    elif pay == "drive_unit":
-        if msg == "Минивэн":
-            sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'minivan')"
-            data.executeSQL(sql, connection)
-        elif msg == "Легковой авто":
-            sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'passenger')"
-            data.executeSQL(sql, connection)
-        elif msg == "Внедорожник":
-            sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'suv')"
-            data.executeSQL(sql, connection)
-        elif msg =="Неважно":
-            sql = "insert into USERS_CARS (id) values("+str(id)+")"
-            data.executeSQL(sql, connection)
-        vk.method("messages.send", {"user_id": id, "message": "Какой привод нужен?", "keyboard": key['drive_unit']})
+    # elif pay == "drive_unit":
+    #     if msg == "Минивэн":
+    #         sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'minivan')"
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "Легковой авто":
+    #         sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'passenger')"
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "Внедорожник":
+    #         sql = "insert into USERS_CARS (id, type) values("+str(id)+", 'suv')"
+    #         data.executeSQL(sql, connection)
+    #     elif msg =="Неважно":
+    #         sql = "insert into USERS_CARS (id) values("+str(id)+")"
+    #         data.executeSQL(sql, connection)
+    #     vk.method("messages.send", {"user_id": id, "message": "Какой привод нужен?", "keyboard": key['drive_unit']})
+    # elif pay == "volume":
+    #     if msg == "Передний":
+    #         sql = "update USERS_CARS set drive_unit = 'front' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "Задний":
+    #         sql = "update USERS_CARS set drive_unit = 'back' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "4wd":
+    #         sql = "update USERS_CARS set drive_unit = '4wd' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     vk.method("messages.send", {"user_id": id, "message": "Какой объем двигателя хотите?", "keyboard": key['volume']})
     
-    elif pay == "volume":
-        if msg == "Передний":
-            sql = "update USERS_CARS set drive_unit = 'front' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        elif msg == "Задний":
-            sql = "update USERS_CARS set drive_unit = 'back' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        elif msg == "4wd":
-            sql = "update USERS_CARS set drive_unit = '4wd' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        vk.method("messages.send", {"user_id": id, "message": "Какой объем двигателя хотите?", "keyboard": key['volume']})
+    # elif pay == "steering":
+    #     if msg == "До двух литров":
+    #         sql = "update USERS_CARS set volume = '<2' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "От двух до трех литров":
+    #         sql = "update USERS_CARS set volume = '2-3' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "От трех литров":
+    #         sql = "update USERS_CARS set volume = '>3' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     vk.method("messages.send", {"user_id": id, "message": "Какой руль?", "keyboard": key['steering']})
     
-    elif pay == "steering":
-        if msg == "До двух литров":
-            sql = "update USERS_CARS set volume = '<2' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        elif msg == "От двух до трех литров":
-            sql = "update USERS_CARS set volume = '2-3' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        elif msg == "От трех литров":
-            sql = "update USERS_CARS set volume = '>3' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        vk.method("messages.send", {"user_id": id, "message": "Какой руль?", "keyboard": key['steering']})
-    
-    elif pay == "price":
-        if msg == "Левый":
-            sql = "update USERS_CARS set steering = 'left' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        elif msg == "Правый":
-            sql = "update USERS_CARS set steering = 'right' where id = "+str(id)
-            data.executeSQL(sql, connection)
-        vk.method("messages.send", {"user_id": id, "message": "Какая цена Вас устроит?", "keyboard": key['price']})
-    
+    # elif pay == "price":
+    #     if msg == "Левый":
+    #         sql = "update USERS_CARS set steering = 'left' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     elif msg == "Правый":
+    #         sql = "update USERS_CARS set steering = 'right' where id = "+str(id)
+    #         data.executeSQL(sql, connection)
+    #     vk.method("messages.send", {"user_id": id, "message": "Какая цена Вас устроит?", "keyboard": key['price']})
     elif pay == "how_long":
        # if msg == "До 2000 рублей/сутки":
        #     sql = "update USERS_CARS set price = '<2000' where id = "+str(id)
@@ -266,10 +265,37 @@ def data_processing(id, pay, msg):
                     s = ""
             if s != "":
                 photos = get_photos(directories, "main")
-                vk.method("messages.send", {"user_id": id, "message":s, "keyboard": get_main_keyboard(id, connection), "attachment": get_attachment(photos)})
+                vk.method("messages.send", {"user_id": id, "message":s, "attachment": get_attachment(photos)})
+                vk.method("messages.send", {"user_id": id, "message":"Хотите, чтобы наш менеджер связался с Вами для уточнения информации по аренде автомобиля?\nОн напишет Вам в личные сообщения в самое ближайшее время.\nУбедитесь, что у Вас открыты личные сообщения.\n", "keyboard": key["connect"]})
         else:        
             vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
-
+    elif pay == "connect":
+        if msg == "Да, хочу":
+            s = smtplib.SMTP('smtp.gmail.com', 587)
+            s.starttls()
+            s.login(getter.get_mail(), getter.get_mail_password())
+            m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
+            sql = "select type from USERS_CARS where id = "+str(id)
+            res = data.executeSQL(sql, connection)
+            if res[0][0] == "suv":
+                m = m + "Внедорожника\n"
+            elif res[0][0] == "passenger":
+                m = m + "Легового авто\n"
+            elif res[0][0] == "minivan":
+                m = m+"Минивэна\n"
+            else:
+                m = m+"Любого авто\n"
+            sql = "select how_long from USERS_CARS where id = "+str(id)
+            res = data.executeSQL(sql, connection)
+            if res[0][0] == "<10":
+                m = m + "Планирует брать на срок менее 10 дней"
+            elif res[0][0] == "10-20":
+                m = m + "Планирует брать на срок от 10 до 20 дней"
+            elif res[0][0] == ">20":
+                m = m + "Планирует брать на срок от 21 дня"
+            s.sendmail(getter.get_mail(), getter.get_mail(), m)
+        elif msg == "Нет, спасибо":
+            vk.method("messages.send", {"user_id": id, "message": "Как скажите", "keyboard": get_main_keyboard(id, connection)})
     else: 
         vk.method("messages.send", {"user_id":id, "message": "Я тебя не понимаю, используйте графическую клавиатуру!\n Если вы хотите узнать какую-либо информацию лично, пишите Максиму https://vk.com/mazzepa4x4","keyboard": get_main_keyboard(id = id, connection = connection)})
 def get_msg():

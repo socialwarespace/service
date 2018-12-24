@@ -13,3 +13,11 @@ def get_token():
     f = open('/home/DaTo/service/system/token.txt')
     line = f.readline()
     return line
+def get_mail():
+    f = open('/home/DaTo/service/system/mail.txt')
+    line = f.readline()
+    return line
+def get_mail_password():
+    f = open('/home/DaTo/service/system/mail_pass.txt')
+    line = f.readline()
+    return line
