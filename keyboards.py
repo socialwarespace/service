@@ -178,6 +178,7 @@ def get_keyboards():
             ]
         ]
     }
+    keyboard_connect = convertToString(keyboard_connect)
     return {
         'start': keyboard_start,
         'main_menu_on': keyboard_main_menu_on,
