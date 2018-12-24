@@ -294,6 +294,7 @@ def data_processing(id, pay, msg):
             elif res[0][0] == ">20":
                 m = m + "Планирует брать на срок от 21 дня"
             s.sendmail(getter.get_mail(), getter.get_mail(), m)
+            s.quit()
         elif msg == "Нет, спасибо":
             vk.method("messages.send", {"user_id": id, "message": "Как скажите", "keyboard": get_main_keyboard(id, connection)})
     else: 
