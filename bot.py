@@ -277,7 +277,9 @@ def get_msg():
         try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
             if messages["count"] >= 1:
+                print(messages["count"], " сообщений")
                 for i in range(0, messages["count"]):
+                    print(i, " сообщение")
                     id = messages["items"][i]["last_message"]["from_id"]
                     msg = messages["items"][i]["last_message"]["text"]
                     if "payload" in messages["items"][i]["last_message"]:
