@@ -268,24 +268,22 @@ def data_processing(id, pay, msg):
             if s != "":
                 photos = get_photos(directories, "main")
                 vk.method("messages.send", {"user_id": id, "message":s, "attachment": get_attachment(photos)})
-                print("111")
                 vk.method("messages.send", {"user_id": id, "message":"Хотите, чтобы наш менеджер связался с Вами для уточнения информации по аренде автомобиля?\nОн напишет Вам в личные сообщения в самое ближайшее время.\nУбедитесь, что у Вас открыты личные сообщения.\n", "keyboard": key["connect"]})
-                print("222")
         else:        
             vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
     elif pay == "connect":
         if msg == "Да, хочу":
-            fromaddr = "slamvsem@gmail.com"
+            fromaddr = "prokatservicechita@gmail.com"
             mypass = getter.get_mail_password()
             mypass = mypass[0:len(mypass)-1]
-            toaddr = "slamvsem@gmail.com"
+            toaddr = "prokatservicechita@gmail.com"
  
             msg = MIMEMultipart()
             msg['From'] = fromaddr
             msg['To'] = toaddr
             msg['Subject'] = "Новый клиент!"
  
-            m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
+            m = "Пользователь vk.com/id"+str(id)+" хочет чтобы вы помогли ему с подбором:\n"
             sql = "select type from USERS_CARS where id = "+str(id)
             res = data.executeSQL(sql, connection)
             if res[0][0] == "suv":
