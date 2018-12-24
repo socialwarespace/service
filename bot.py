@@ -80,6 +80,8 @@ def get_auto_temp(state):
         sql = sql + "select mark, model, volume, drive_unit, steering, count_of_places, perfect_price, img from CARS where"
     if state[1]!=None:
         sql = sql + " type = '" + str(state[1]) + "'"
+    else:
+        sql = sql + " 1<2"
     print(sql)
     return data.executeSQL(sql, connection)
 
