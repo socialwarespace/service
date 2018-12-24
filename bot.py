@@ -279,6 +279,7 @@ def data_processing(id, pay, msg):
             mail = mail[0:len(mail)-1]
             print(mail)
             psw = getter.get_mail_password()
+            psw = psw[0:len(psw)-1]
             print(psw)
             s.login(getter.get_mail(), getter.get_mail_password())
             print("залогинился!")
