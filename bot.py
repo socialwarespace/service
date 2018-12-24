@@ -276,6 +276,7 @@ def data_processing(id, pay, msg):
             s = smtplib.SMTP('smtp.gmail.com', 587)
             s.starttls()
             s.login(getter.get_mail(), getter.get_mail_password())
+            print("залогинился!")
             m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
             sql = "select type from USERS_CARS where id = "+str(id)
             res = data.executeSQL(sql, connection)
@@ -304,13 +305,9 @@ def data_processing(id, pay, msg):
 def get_msg():
     while True:
         try:
-            print("while!")
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unread"})
-            print("new msg ", messages)
             if messages["count"] >= 1:
-                print(messages["count"], " сообщений")
                 for i in range(0, messages["count"]):
-                    print(i, " сообщение")
                     id = messages["items"][i]["last_message"]["from_id"]
                     msg = messages["items"][i]["last_message"]["text"]
                     if "payload" in messages["items"][i]["last_message"]:
@@ -327,9 +324,7 @@ def get_msg():
                         pay = "0"
                     print("pay: ", pay)
                     print("msg: ", msg)
-                    print("Запускаю процесс ", id," ", pay," ", msg)
                     data_processing(id=id, pay=pay, msg=msg)
-                print("Вышел из фор!")
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
