@@ -238,7 +238,6 @@ def data_processing(id, pay, msg):
         sql = "select * from USERS_CARS where id = " + str(id)
         res = data.executeSQL(sql, connection)
         cars = get_auto_temp(res[0])
-        print("ВЫШЕЛ!")
         if cars != 0:
             i = 1
             s = ""
@@ -265,7 +264,6 @@ def data_processing(id, pay, msg):
                     vk.method("messages.send", {"user_id": id, "message":s, "attachment": get_attachment(photos)})
                     directories = []
                     s = ""
-                    print(i, " ", directories)
             if s != "":
                 photos = get_photos(directories, "main")
                 vk.method("messages.send", {"user_id": id, "message":s, "keyboard": get_main_keyboard(id, connection), "attachment": get_attachment(photos)})
@@ -279,23 +277,25 @@ def get_msg():
         try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
             if messages["count"] >= 1:
-                id = messages["items"][0]["last_message"]["from_id"]
-                msg = messages["items"][0]["last_message"]["text"]
-                if "payload" in messages["items"][0]["last_message"]:
-                    pay = messages["items"][0]["last_message"]["payload"][1:-1]
-                    try:
-                        pay = bytes(pay, 'cp1251').decode('utf-8')
-                    except ValueError:
-                        pass
-                    try:
-                        msg = bytes(msg, 'cp1251').decode('utf-8')
-                    except ValueError:
-                        pass    
-                else:
-                    pay = "0"
-                print("pay: ", pay)
-                print("msg: ", msg)
-                data_processing(id=id, pay=pay, msg=msg)
+                for i in range(0, messages["count"]):
+                    id = messages["items"][0]["last_message"]["from_id"]
+                    msg = messages["items"][0]["last_message"]["text"]
+                    if "payload" in messages["items"][0]["last_message"]:
+                        pay = messages["items"][0]["last_message"]["payload"][1:-1]
+                        try:
+                            pay = bytes(pay, 'cp1251').decode('utf-8')
+                        except ValueError:
+                            pass
+                        try:
+                            msg = bytes(msg, 'cp1251').decode('utf-8')
+                        except ValueError:
+                            pass    
+                    else:
+                        pay = "0"
+                    print("pay: ", pay)
+                    print("msg: ", msg)
+                    data_processing(id=id, pay=pay, msg=msg)
+                print("Вышел из фор!")
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
