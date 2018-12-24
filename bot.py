@@ -3,6 +3,8 @@
 # vim:fileencoding=utf-8
 import vk_api
 import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import json
 import getter
 import requests
@@ -273,37 +275,25 @@ def data_processing(id, pay, msg):
             vk.method("messages.send", {"user_id": id, "message": "К сожалению, по данным фильтрам результатов нет.", "keyboard": get_main_keyboard(id, connection)})     
     elif pay == "connect":
         if msg == "Да, хочу":
-            s = smtplib.SMTP('smtp.gmail.com', 587)
-            s.starttls()
-            mail = getter.get_mail()
-            mail = mail[0:len(mail)-1]
-            print(mail)
-            psw = getter.get_mail_password()
-            psw = psw[0:len(psw)-1]
-            print(psw)
-            s.login("slamvsem@gmail.com", "qawsedrf132")
-            print("залогинился!")
-            m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
-            sql = "select type from USERS_CARS where id = "+str(id)
-            res = data.executeSQL(sql, connection)
-            if res[0][0] == "suv":
-                m = m + "Внедорожника\n"
-            elif res[0][0] == "passenger":
-                m = m + "Легового авто\n"
-            elif res[0][0] == "minivan":
-                m = m+"Минивэна\n"
-            else:
-                m = m+"Любого авто\n"
-            sql = "select how_long from USERS_CARS where id = "+str(id)
-            res = data.executeSQL(sql, connection)
-            if res[0][0] == "<10":
-                m = m + "Планирует брать на срок менее 10 дней"
-            elif res[0][0] == "10-20":
-                m = m + "Планирует брать на срок от 10 до 20 дней"
-            elif res[0][0] == ">20":
-                m = m + "Планирует брать на срок от 21 дня"
-            s.sendmail(mail, mail, m)
-            s.quit()
+            fromaddr = "slamvsem@gmail.com"
+            mypass = "qawsedrf132"
+            toaddr = "slamvsem@gmail.com"
+ 
+            msg = MIMEMultipart()
+            msg['From'] = fromaddr
+            msg['To'] = toaddr
+            msg['Subject'] = "Привет от питона"
+ 
+            body = "Это пробный текст сообщения"
+            msg.attach(MIMEText(body, 'plain'))
+ 
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(fromaddr, mypass)
+            text = msg.as_string()
+            server.sendmail(fromaddr, toaddr, text)
+            server.quit()
+            vk.method("messages.send", {"user_id": id, "message": "С Ваши свяжутся в ближайшее время!", "keyboard": get_main_keyboard(id, connection)})
         elif msg == "Нет, спасибо":
             vk.method("messages.send", {"user_id": id, "message": "Как скажите", "keyboard": get_main_keyboard(id, connection)})
     else: 

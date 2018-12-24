@@ -15,3 +15,34 @@ insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering
 insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Grand Hiace', 3.4, '4wd', 7, 'right', 'img/grand_hiace');
 insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Toyota', 'Prius', 1.8, 'front', 5, 'right', 'img/prius30');
 insert into CARS (id, mark, model, volume, drive_unit, count_of_places, steering, img) values(null, 'Lexus', 'LX470', 4.7, '4wd', 5, 'left', 'img/lx470');
+s = smtplib.SMTP('smtp.gmail.com', 587)
+            s.starttls()
+            mail = getter.get_mail()
+            mail = mail[0:len(mail)-1]
+            print(mail)
+            psw = getter.get_mail_password()
+            psw = psw[0:len(psw)-1]
+            print(psw)
+            s.login("slamvsem@gmail.com", "qawsedrf132")
+            print("залогинился!")
+            m = "Пользователь vk.com/id"+str(id)+"хочет чтобы вы помогли ему с подбором:\n"
+            sql = "select type from USERS_CARS where id = "+str(id)
+            res = data.executeSQL(sql, connection)
+            if res[0][0] == "suv":
+                m = m + "Внедорожника\n"
+            elif res[0][0] == "passenger":
+                m = m + "Легового авто\n"
+            elif res[0][0] == "minivan":
+                m = m+"Минивэна\n"
+            else:
+                m = m+"Любого авто\n"
+            sql = "select how_long from USERS_CARS where id = "+str(id)
+            res = data.executeSQL(sql, connection)
+            if res[0][0] == "<10":
+                m = m + "Планирует брать на срок менее 10 дней"
+            elif res[0][0] == "10-20":
+                m = m + "Планирует брать на срок от 10 до 20 дней"
+            elif res[0][0] == ">20":
+                m = m + "Планирует брать на срок от 21 дня"
+            s.sendmail(mail, mail, m)
+            s.quit()
