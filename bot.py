@@ -136,12 +136,12 @@ def get_auto(state):
 
 
 
-def data_processing(id, pay, msg):
+def data_processing(id, pay, msg, people):
     add_user(id = id)
     if pay=='"command":"start"' or pay == "admin":
         photos = get_photos(["img/logo"], "main")
         print(photos)
-        vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection), "attachment": get_attachment(photos)})
+        vk.method("messages.send", {"user_id": id, "message": "Привет, "+people["first_name"]+" я бот Макс!\nЯ представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клаватуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection), "attachment": get_attachment(photos)})
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     elif pay == "about_us":
@@ -324,8 +324,7 @@ def get_msg():
             if messages["count"] >= 1:
                 for i in range(0, messages["count"]):
                     id = messages["items"][i]["last_message"]["from_id"]
-                    name = vk.method("users.get", {"user_ids":id})
-                    print(name)
+                    people = vk.method("users.get", {"user_ids":id})
                     msg = messages["items"][i]["last_message"]["text"]
                     if "payload" in messages["items"][i]["last_message"]:
                         pay = messages["items"][i]["last_message"]["payload"][1:-1]
@@ -341,7 +340,7 @@ def get_msg():
                         pay = "0"
                     print("pay: ", pay)
                     print("msg: ", msg)
-                    data_processing(id=id, pay=pay, msg=msg)
+                    data_processing(id=id, pay=pay, msg=msg, people = people)
         except Exception:
             time.sleep(0.1)
 key = keyboards.get_keyboards() 
