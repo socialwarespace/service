@@ -324,7 +324,7 @@ def get_msg():
             if messages["count"] >= 1:
                 for i in range(0, messages["count"]):
                     id = messages["items"][i]["last_message"]["from_id"]
-                    name = vk.method("users.get", str(id))["first_name"]
+                    name = vk.method("users.get", id)["first_name"]
                     print(name)
                     msg = messages["items"][i]["last_message"]["text"]
                     if "payload" in messages["items"][i]["last_message"]:
