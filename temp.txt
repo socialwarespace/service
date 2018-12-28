@@ -46,3 +46,5 @@ s = smtplib.SMTP('smtp.gmail.com', 587)
                 m = m + "Планирует брать на срок от 21 дня"
             s.sendmail(mail, mail, m)
             s.quit()
+
+            

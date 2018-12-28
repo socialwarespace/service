@@ -35,7 +35,7 @@ def get_keyboards():
                 get_button(label="Отписаться от новостей",color="default", payload="subscribe")
             ],
             [
-                get_button(label="Узнать о нас",color="default", payload="about_us")
+                get_button(label="Узнать информацию",color="default", payload="about")
             ],
             [
                 get_button(label="Подобрать авто",color="default", payload="selection")
@@ -51,7 +51,7 @@ def get_keyboards():
                 get_button(label="Подписаться на новости",color="default", payload="subscribe")
             ],
             [
-                get_button(label="Узнать о нас",color="default", payload="about_us")
+                get_button(label="Узнать информацию",color="default", payload="about")
             ],
             [
                 get_button(label="Подобрать авто",color="default", payload="selection")
@@ -60,6 +60,18 @@ def get_keyboards():
     }
     keyboard_main_menu_off = convertToString(keyboard_main_menu_off)
 
+    keyboard_about = {
+        "one_time": True,
+        "buttons":[
+            [
+                get_button(label="О компании",color="default", payload="about_us")
+            ],
+            [
+                get_button(label="Об аренде",color="default", payload="about_rent")
+            ],
+        ]
+    }
+    keyboard_about = convertToString(keyboard_about)
     keyboard_type = {
         "one_time": True,
         "buttons":[
@@ -183,6 +195,7 @@ def get_keyboards():
         'start': keyboard_start,
         'main_menu_on': keyboard_main_menu_on,
         'main_menu_off':keyboard_main_menu_off,
+        'about': keyboard_about,
         'type': keyboard_type,
         'drive_unit': keyboard_drive_unit,
         'volume': keyboard_volume,

@@ -144,11 +144,23 @@ def data_processing(id, pay, msg, people):
         vk.method("messages.send", {"user_id": id, "message": "Привет, "+name+"!\nМеня зовут бот Макс. Я представляю лучшую компанию по аренде авто 'Прокат Сервис Чита'\n\nЯ могу рассказать тебе о компании, подобрать авто или показать список всех доступных авто!\n\nСо мной следует общаться посредством графической клавиатуры, это очень важно.\nИтак, начнем😎", "keyboard": get_main_keyboard(id = id, connection = connection), "attachment": get_attachment(photos)})
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
+    
+    elif pay == "about":
+        vk.method("messages.send", {"user_id": id, "message": "Какая информация Вас интересует?", "keyboard":key['about']})
     elif pay == "about_us":
         about = open("info/about.txt")
         msg = about.read()
         vk.method("messages.send", {"user_id": id, "message": msg, "keyboard":get_main_keyboard(id = id, connection = connection)})
-    
+        about.close()
+    elif pay == "about_rent":
+        rent = open("info/rent.txt")
+        msg = rent.read()
+        vk.method("messages.send", {"user_id": id, "message": msg})
+        docs = open("info/docs.txt")
+        msg = docs.read()
+        vk.method("messages.send", {"user_id": id, "message": msg, "keyboard":get_main_keyboard(id = id, connection = connection)})
+        about.close()
+        docs.close()
     elif pay == "subscribe":
         subscribe(id)
     
